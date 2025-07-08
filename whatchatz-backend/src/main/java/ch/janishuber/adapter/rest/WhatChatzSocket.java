@@ -1,7 +1,14 @@
-package ch.websockets;
+package ch.janishuber.adapter.rest;
 
+import ch.janishuber.adapter.persistence.ContactRepository;
+import ch.janishuber.adapter.persistence.UserRepository;
+import ch.janishuber.adapter.rest.dto.UserCreation;
+import ch.janishuber.domain.AuthService;
+import jakarta.inject.Inject;
 import jakarta.websocket.*;
 import jakarta.websocket.server.ServerEndpoint;
+import jakarta.ws.rs.core.HttpHeaders;
+import jakarta.ws.rs.core.Response;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -10,9 +17,39 @@ import java.util.Set;
 
 @ServerEndpoint("/websocket")
 public class WhatChatzSocket {
-
     // Sammlung aller verbundenen Sessions
     private static Set<Session> sessions = Collections.synchronizedSet(new HashSet<>());
+    @Inject
+    private AuthService authService;
+    @Inject
+    private UserRepository userRepository;
+    @Inject
+    private ContactRepository contactRepository;
+
+    public Response saveUser(HttpHeaders headers, UserCreation userCreation) {
+        String authHeader = headers.getHeaderString("Authorization");
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+
+        String idToken = authHeader.substring("Bearer ".length());
+        String uid = authService.extractUidFromToken(idToken);
+
+        userRepository.save(uid, userCreation.name(), userCreation.info());
+        return Response.ok("User saved successfully").build();
+    }
+
+    public Response getAllContacs(HttpHeaders headers) {
+        String authHeader = headers.getHeaderString("Authorization");
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+
+        String idToken = authHeader.substring("Bearer ".length());
+        String uid = authService.extractUidFromToken(idToken);
+
+        return Response.ok(contactRepository.getAllContactsFor(uid)).build();
+    }
 
     @OnOpen
     public void onOpen(Session session) {
