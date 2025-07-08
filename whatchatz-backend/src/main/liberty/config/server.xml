@@ -17,4 +17,17 @@
     <!-- Configures the application on a specified context root -->
     <webApplication contextRoot="/websocket-app" location="websocket-app.war"/>
 
+    <dataSource id="whatchatz" jndiName="jdbc/whatchatz" includeEnvVars="true">
+        <jdbcDriver libraryRef="mariadb" javax.sql.DataSource="org.mariadb.jdbc.MariaDbDataSource"
+                    javax.sql.XADataSource="org.mariadb.jdbc.MariaDbDataSource"
+                    javax.sql.ConnectionPoolDataSource="org.mariadb.jdbc.MariaDbDataSource"/>
+
+        <properties url="jdbc:mariadb://${DB_HOST}:${DB_PORT}/${DB_NAME}"
+                    user="${DB_USER}"
+                    password="${DB_PASSWORD}"/>
+    </dataSource>
+
+    <library id="mariadb">
+        <fileset dir="resources" includes="mariadb-java-client-*.jar"/>
+    </library>
 </server>
