@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server description="Simple WebSocket Demo Server">
+
+    <!-- Enable features -->
+    <featureManager>
+        <feature>jakartaee-10.0</feature>
+    </featureManager>
+
+    <!-- HTTP endpoint - only HTTP for simple demo -->
+    <httpEndpoint id="defaultHttpEndpoint"
+                  httpPort="9080"
+                  host="*"/>
+
+    <!-- Automatically expand WAR files and EAR files -->
+    <applicationManager autoExpand="true"/>
+
+    <!-- Configures the application on a specified context root -->
+    <webApplication contextRoot="/websocket-app" location="websocket-app.war"/>
+
+</server>
