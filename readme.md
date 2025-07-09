@@ -31,3 +31,7 @@ Erweiterungen:
 Letzte Nachricht anzeigen bei der Kontaktübersicht.
 
 Gruppen erstellen.
+
+Kontakt löschen.
+
+Letzte Nachricht Timestamp korrekt aktualisieren.
