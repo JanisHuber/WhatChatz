@@ -8,7 +8,6 @@ import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.websocket.*;
 import jakarta.websocket.server.ServerEndpoint;
-import jakarta.ws.rs.PathParam;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -30,17 +29,21 @@ public class WhatChatzSocket {
     }
 
     @OnOpen
-    public void onOpen(Session session, @PathParam("chatId") String chatId) {
+    public void onOpen(Session session) {
+        String chatId = extractChatIdFromUrl(session.getQueryString());
+
         String token = socketService.extractToken(session.getQueryString());
         String uid = socketService.verifyAndExtractUid(token);
         session.getUserProperties().put("uid", uid);
+        session.getUserProperties().put("chatId", chatId);
 
         chatRooms.computeIfAbsent(chatId, k -> ConcurrentHashMap.newKeySet()).add(session);
     }
 
     @OnMessage
-    public void onMessage(String rawJson, Session sender, @PathParam("chatId") String chatId) {
+    public void onMessage(String rawJson, Session sender) {
         try {
+            String chatId = (String) sender.getUserProperties().get("chatId");
             MessageRequest messageRequest = parseMessage(rawJson);
             String senderUid = (String) sender.getUserProperties().get("uid");
             if (senderUid == null) {
@@ -66,7 +69,8 @@ public class WhatChatzSocket {
     }
 
     @OnClose
-    public void onClose(Session session, @PathParam("chatId") String chatId) {
+    public void onClose(Session session) {
+        String chatId = (String) session.getUserProperties().get("chatId");
         Set<Session> sessions = chatRooms.get(chatId);
         if (sessions != null) {
             sessions.remove(session);
@@ -109,4 +113,8 @@ public class WhatChatzSocket {
         return MAPPER.readValue(json, MessageRequest.class);
     }
 
+    private String extractChatIdFromUrl(String url) {
+        String[] segments = url.split("/");
+        return segments[segments.length - 1];
+    }
 }

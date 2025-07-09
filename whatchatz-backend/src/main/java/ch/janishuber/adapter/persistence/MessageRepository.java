@@ -2,13 +2,15 @@ package ch.janishuber.adapter.persistence;
 
 import ch.janishuber.adapter.persistence.entity.MessageEntity;
 import ch.janishuber.domain.Message;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 import java.util.List;
 
+@RequestScoped
 public class MessageRepository {
-    @PersistenceContext(name = "jpa-unit")
+    @PersistenceContext(unitName = "whatchatzPU")
     private EntityManager em;
 
     public List<Message> getAllMessagesForChat(String chatId) {

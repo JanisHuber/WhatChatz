@@ -1,13 +1,17 @@
 package ch.janishuber.adapter.helpers;
 
 import ch.janishuber.domain.AuthService;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.core.HttpHeaders;
 
+@ApplicationScoped
 public class AuthHelper {
     @Inject
     private AuthService authService;
 
+    public AuthHelper() {
+    }
 
     public String verifyAndExtractUid(HttpHeaders headers) {
         String authHeader = headers.getHeaderString("Authorization");
@@ -28,7 +32,7 @@ public class AuthHelper {
         try {
             uid = authService.extractUidFromToken(token);
         } catch (Exception e) {
-            throw new IllegalStateException("Unauthorized: Invalid token");
+            throw new IllegalStateException("Unauthorized: Invalid token: " + token);
         }
 
         if (uid == null || uid.isBlank()) {

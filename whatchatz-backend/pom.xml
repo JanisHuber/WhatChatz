@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ch.websockets</groupId>
+    <groupId>ch.whatchatz</groupId>
     <artifactId>whatchatz-backend</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
@@ -32,7 +32,8 @@
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
-            <version>3.5.2</version>
+            <version>3.1.4</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>jakarta.transaction</groupId>
@@ -52,7 +53,7 @@
     </dependencies>
 
     <build>
-        <finalName>whatchatz-backend</finalName>
+        <finalName>whatchatz</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>

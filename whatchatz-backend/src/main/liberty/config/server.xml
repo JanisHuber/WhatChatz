@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<server description="Simple WebSocket Demo Server">
+<server description="WhatChatz Application Server">
 
     <!-- Enable features -->
     <featureManager>
         <feature>jakartaee-10.0</feature>
+        <feature>jdbc-4.2</feature>
+        <feature>persistence-3.1</feature>
+        <feature>persistenceContainer-3.1</feature>
+        <feature>enterpriseBeansLite-4.0</feature>
     </featureManager>
 
     <!-- HTTP endpoint - only HTTP for simple demo -->
@@ -11,21 +15,11 @@
                   httpPort="9080"
                   host="*"/>
 
-    <!-- Enable CORS for all origins, methods, and headers -->
-    <httpDispatcher>
-        <cors enabled="true"
-              domain="*"
-              allowCredentials="true"
-              allowedMethods="GET,POST,PUT,DELETE,OPTIONS"
-              allowedHeaders="origin, content-type, accept, authorization"
-              maxAge="3600"/>
-    </httpDispatcher>
-
     <!-- Automatically expand WAR files and EAR files -->
     <applicationManager autoExpand="true"/>
 
     <!-- Configures the application on a specified context root -->
-    <webApplication contextRoot="/websocket-app" location="websocket-app.war"/>
+    <webApplication contextRoot="/" location="whatchatz.war"/>
     <!--
     <dataSource id="whatchatz" jndiName="jdbc/whatchatz" includeEnvVars="true">
         <jdbcDriver libraryRef="mariadb" javax.sql.DataSource="org.mariadb.jdbc.MariaDbDataSource"
@@ -37,12 +31,12 @@
                     password="${DB_PASSWORD}"/>
     </dataSource>
     -->
-    <dataSource id="whatchatz" jndiName="jdbc/whatchatz">
-        <jdbcDriver libraryRef="mariadb"
-                    javax.sql.DataSource="org.mariadb.jdbc.MariaDbDataSource"
-                    javax.sql.XADataSource="org.mariadb.jdbc.MariaDbDataSource"
-                    javax.sql.ConnectionPoolDataSource="org.mariadb.jdbc.MariaDbDataSource"/>
-
+    <dataSource id="whatchatz" jndiName="jdbc/whatchatz" includeEnvVars="true">
+        <jdbcDriver
+                libraryRef="mariadb"
+                javax.sql.DataSource="org.mariadb.jdbc.MariaDbDataSource"
+                javax.sql.XADataSource="org.mariadb.jdbc.MariaDbDataSource"
+                javax.sql.ConnectionPoolDataSource="org.mariadb.jdbc.MariaDbDataSource"/>
         <properties
                 url="jdbc:mariadb://localhost:3306/whatchatz"
                 user="root"

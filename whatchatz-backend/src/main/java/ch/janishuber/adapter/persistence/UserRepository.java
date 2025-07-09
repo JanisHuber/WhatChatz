@@ -8,7 +8,7 @@ import jakarta.transaction.Transactional;
 
 @RequestScoped
 public class UserRepository {
-    @PersistenceContext(name = "jpa-unit")
+    @PersistenceContext(unitName = "whatchatzPU")
     private EntityManager em;
 
     @Transactional
