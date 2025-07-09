@@ -5,7 +5,7 @@ dist/
 npm-debug.log
 yarn-error.log
 .env
-environment*.ts
+src/environments/environment*.ts
 whatchatz-firebase*.json
 
 # === Java / Maven ===
