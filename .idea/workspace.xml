@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2bcecee9-f241-460d-9eba-19bf4955b0e8" name="Changes" comment="project setup">
-      <change afterPath="$PROJECT_DIR$/frontend-backup/src/environments/environment.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-frontend/src/environments/environment.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="2bcecee9-f241-460d-9eba-19bf4955b0e8" name="Changes" comment="submodul fix">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/resources/whatchatz-firebase-adminsdk-fbsvc-8b5abfc2b9.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-frontend" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatchatz-backend/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/.gitignore" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +124,7 @@
       <updated>1751959468026</updated>
       <workItem from="1751959469193" duration="16983000" />
       <workItem from="1752037772221" duration="6367000" />
-      <workItem from="1752051197842" duration="332000" />
+      <workItem from="1752051197842" duration="1081000" />
     </task>
     <task id="LOCAL-00001" summary="project setup">
       <option name="closed" value="true" />
@@ -198,7 +198,47 @@
       <option name="project" value="LOCAL" />
       <updated>1752051258192</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="project setup">
+      <option name="closed" value="true" />
+      <created>1752051600107</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1752051600107</updated>
+    </task>
+    <task id="LOCAL-00011" summary="project setup">
+      <option name="closed" value="true" />
+      <created>1752051623926</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1752051623926</updated>
+    </task>
+    <task id="LOCAL-00012" summary="project setup">
+      <option name="closed" value="true" />
+      <created>1752051628861</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1752051628861</updated>
+    </task>
+    <task id="LOCAL-00013" summary="project setup">
+      <option name="closed" value="true" />
+      <created>1752051763499</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1752051763499</updated>
+    </task>
+    <task id="LOCAL-00014" summary="submodul fix">
+      <option name="closed" value="true" />
+      <created>1752052112639</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1752052112639</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,6 +260,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="project setup" />
-    <option name="LAST_COMMIT_MESSAGE" value="project setup" />
+    <MESSAGE value="submodul fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="submodul fix" />
   </component>
 </project>
