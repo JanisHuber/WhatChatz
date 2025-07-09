@@ -25,3 +25,9 @@ Der Benutzer sieht eine Liste seiner Kontakte mit dem letzten Nachrichtenzeitpun
 Die App zeigt neue Nachrichten sofort im Chatverlauf an.
 
 Die Datenbank speichert Zeitstempel zu jeder Nachricht.
+
+Erweiterungen:
+
+Letzte Nachricht anzeigen bei der Kontaktübersicht.
+
+Gruppen erstellen.
