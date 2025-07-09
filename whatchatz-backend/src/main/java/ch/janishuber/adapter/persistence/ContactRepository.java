@@ -14,11 +14,11 @@ public class ContactRepository {
     private EntityManager em;
 
     public List<Contact> getAllContactsFor(String uid) {
-        return em.createQuery("FROM Contact c WHERE c.owner_id = :uid", ContactEntity.class)
+        return em.createQuery("FROM ContactEntity c WHERE c.owner_id = :uid", ContactEntity.class)
                 .setParameter("uid", uid)
                 .getResultList()
                 .stream()
-                .map(contact -> new Contact(contact.getId(), contact.getOwnerId(), contact.getName(), contact.getInfo()))
+                .map(contact -> new Contact(contact.getId(), contact.getOwnerId(), contact.getContactId(), contact.getContactName(), contact.getLastMessageTimestamp()))
                 .toList();
     }
 }

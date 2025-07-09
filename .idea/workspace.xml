@@ -5,19 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bcecee9-f241-460d-9eba-19bf4955b0e8" name="Changes" comment="project setup">
-      <change afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/persistence/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/persistence/entity/UserEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/rest/dto/UserCreation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/application/FirebaseInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/resources/whatchatz-firebase-adminsdk-fbsvc-8b5abfc2b9.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-backend/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-backend/mvnw.cmd" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/dto/MessageRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/dto/UserCreationRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/helpers/AuthHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/helpers/CDIProviderHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/socket/SocketService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/socket/WhatChatzSocket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/domain/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/whatchatz-backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/websockets/WhatChatzSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/rest/WhatChatzSocket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/websockets/rest/RestApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/application/RestApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-backend/src/main/liberty/config/server.xml" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/liberty/config/server.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/persistence/ContactRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/persistence/ContactRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/persistence/MessageRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/persistence/MessageRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/persistence/entity/ContactEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/persistence/entity/ContactEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/rest/WhatChatzSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/rest/WhatChatzRestResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/rest/dto/UserCreation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/application/RestApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/application/RestApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/domain/Contact.java" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/domain/Contact.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/app.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/src/app/pages/chat/chat.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/pages/chat/chat.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/src/app/pages/user/user.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/pages/user/user.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/src/app/pages/user/user.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/pages/user/user.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/src/app/pages/whatchatz-routing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/pages/whatchatz-routing.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend/src/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +43,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Record" />
         <option value="Class" />
       </list>
     </option>
@@ -37,24 +54,28 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "JanisHuber"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;JanisHuber&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/JanisHuber/WhatChatz.git",
-    "accountId": "d0632697-e869-4b45-8acf-09a872aa63d1"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/JanisHuber/WhatChatz.git&quot;,
+    &quot;accountId&quot;: &quot;d0632697-e869-4b45-8acf-09a872aa63d1&quot;
   }
-}]]></component>
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="OptimizeOnSaveOptions">
     <option name="myRunOnSave" value="true" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2zaBnBn74iVA2VW3Q0wgdVKMxcG" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -63,22 +84,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Intellji/Private - Projects/WhatChatz",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "rearrange.code.on.save": "true",
-    "settings.editor.selected.configurable": "actions.on.save",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Database Script.init.sql.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Intellji/Private - Projects/WhatChatz&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mariadb&quot;
+    ],
+    &quot;RunConfigurationTargetLRU&quot;: [
+      &quot;ab09b6b3-3986-4a82-828e-67a1fbef06d0&quot;
+    ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Intellji\Private - Projects\WhatChatz\whatchatz-backend\src\main\resources" />
@@ -86,6 +116,19 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="ch.janishuber.adapter.persistence" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="init.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/whatchatz-database/init.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="ab09b6b3-3986-4a82-828e-67a1fbef06d0" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Database Script.init.sql" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -103,7 +146,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1751959468026</updated>
-      <workItem from="1751959469193" duration="6044000" />
+      <workItem from="1751959469193" duration="16983000" />
+      <workItem from="1752037772221" duration="5247000" />
     </task>
     <task id="LOCAL-00001" summary="project setup">
       <option name="closed" value="true" />
@@ -113,7 +157,15 @@
       <option name="project" value="LOCAL" />
       <updated>1751962569830</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="project setup">
+      <option name="closed" value="true" />
+      <created>1751978828599</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1751978828599</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

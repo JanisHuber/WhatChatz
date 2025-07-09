@@ -10,7 +10,7 @@ public class ContactEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(name = "owner_id", nullable = false)
     private String ownerId;
@@ -34,7 +34,7 @@ public class ContactEntity {
         this.lastMessageTimestamp = lastMessageTimestamp;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
