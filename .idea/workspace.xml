@@ -5,51 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bcecee9-f241-460d-9eba-19bf4955b0e8" name="Changes" comment="project setup">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/dto/MessageRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/dto/UserCreationRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/helpers/AuthHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/helpers/CDIProviderHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/socket/SocketService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/socket/WhatChatzSocket.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/domain/Message.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/core/guards/auth.guard.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/core/models/contact.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/core/service/auth.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/core/service/whatchatz-rest.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/core/service/whatchatz-socket.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/features/user/login/login.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/features/user/login/login.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/features/user/login/login.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/features/user/register/register.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/features/user/register/register.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/features/user/register/register.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/whatchatz-frontend/tailwind.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/persistence/ContactRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/persistence/ContactRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/persistence/MessageRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/persistence/MessageRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/persistence/entity/ContactEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/persistence/entity/ContactEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/rest/WhatChatzSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/rest/WhatChatzRestResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/adapter/rest/dto/UserCreation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/application/RestApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/application/RestApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/domain/Contact.java" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-backend/src/main/java/ch/janishuber/domain/Contact.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-frontend" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/app.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/src/app/pages/chat/chat.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/pages/chat/chat.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/src/app/pages/user/user.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/pages/user/user.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/src/app/pages/user/user.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/pages/user/user.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/src/app/pages/whatchatz-routing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend/src/app/pages/whatchatz-routing.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend/src/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whatchatz-frontend/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/whatchatz-frontend/src/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/whatchatz-frontend" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,7 +119,7 @@
       <option name="presentableId" value="Default" />
       <updated>1751959468026</updated>
       <workItem from="1751959469193" duration="16983000" />
-      <workItem from="1752037772221" duration="5760000" />
+      <workItem from="1752037772221" duration="6064000" />
     </task>
     <task id="LOCAL-00001" summary="project setup">
       <option name="closed" value="true" />
@@ -189,7 +145,31 @@
       <option name="project" value="LOCAL" />
       <updated>1752050134747</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="project setup">
+      <option name="closed" value="true" />
+      <created>1752050215105</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1752050215105</updated>
+    </task>
+    <task id="LOCAL-00005" summary="project setup">
+      <option name="closed" value="true" />
+      <created>1752050389173</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1752050389173</updated>
+    </task>
+    <task id="LOCAL-00006" summary="project setup">
+      <option name="closed" value="true" />
+      <created>1752050441498</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1752050441498</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -197,6 +177,17 @@
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="project setup" />
