@@ -1,0 +1,8 @@
+<div class="space-y-4">
+    <div [class]="isSender ? OuterDivClassBlue : OuterDivClassGray">
+        <div [class]="isSender ? InnerDivClassBlue : InnerDivClassGray">
+            <p [class]="isSender ? pClassBlue : pClassGray">{{ message.message }}</p>
+            <p [class]="isSender ? pClassBlue : pClassGray">{{ message.timeStamp | date:'HH:mm' }}</p>
+        </div>
+    </div>
+</div>

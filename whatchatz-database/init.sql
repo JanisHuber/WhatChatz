@@ -2,10 +2,15 @@ CREATE DATABASE IF NOT EXISTS whatchatz;
 
 USE whatchatz;
 
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS messages;
+DROP TABLE IF EXISTS contacts;
+
+
 CREATE TABLE IF NOT EXISTS users
 (
     uid  VARCHAR(100) PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
+    name VARCHAR(100) UNIQUE NOT NULL,
     info TEXT
 );
 

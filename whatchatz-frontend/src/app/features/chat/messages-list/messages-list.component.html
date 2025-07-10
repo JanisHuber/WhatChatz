@@ -1,0 +1,14 @@
+<div class="h-full p-4 overflow-y-auto flex flex-col">
+    @if (messages.length > 0) {
+    <div class="flex-1"></div>
+
+    <div *ngFor="let message of messages" class="mb-4">
+        <app-message-card [message]="message" [isSender]="message.senderId === selectedContact.contactId">
+        </app-message-card>
+    </div>
+    } @else {
+    <div class="flex-1 flex items-center justify-center text-gray-500">
+        <p>Noch keine Nachrichten vorhanden</p>
+    </div>
+    }
+</div>

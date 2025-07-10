@@ -2,6 +2,9 @@
 <div>Lade Authentifizierungsstatus...</div>
 } @else if(isLoggedIn$ | async) {
 <h1>User</h1>
+<p>{{ user?.name }}</p>
+<p>{{ user?.info }}</p>
+<a (click)="logout()">logout</a>
 } @else {
 <app-login></app-login>
 <app-register></app-register>

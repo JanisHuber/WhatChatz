@@ -1,0 +1,14 @@
+<div class="flex flex-row items-center w-full">
+    <!-- Avatar -->
+    <div class="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+        <svg class="w-8 h-8 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+        </svg>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="flex-1 min-w-0">
+        <div class="font-medium text-gray-900 truncate">{{ contact.contactName }}</div>
+        <div class="text-sm text-gray-500">{{ formatLastMessage(contact.lastMessage) }}</div>
+    </div> 
+</div>

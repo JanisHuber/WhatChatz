@@ -1,1 +1,23 @@
-<p>chat works!</p>
+<div class="flex h-screen bg-gray-300 p-4 justify-center">
+    <div class="flex max-w-8xl w-full">
+        <app-left-bar (userClick)="onUserClick()"></app-left-bar>
+
+        <div class="w-[30%] mr-4">
+            <div class="bg-white rounded-2xl h-full shadow-lg">
+                <app-contact-list [contacts]="contacts" [selectedContactId]="selectedContact?.id || null"
+                    (contactSelected)="onContactSelected($event)" (addContactRequested)="showAddContactModal = true">
+                </app-contact-list>
+            </div>
+        </div>
+
+        <div class="w-[65%]">
+            <app-chat-window [selectedContact]="selectedContact" [messages]="messages" (sendMessage)="onSendMessage($event)"></app-chat-window>
+        </div>
+    </div>
+</div>
+
+@if (showAddContactModal) {
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <app-new-contact-popup (closePopup)="showAddContactModal = false" (addContact)="addContact($event)"></app-new-contact-popup>
+</div>
+}

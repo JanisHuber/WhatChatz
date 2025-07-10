@@ -14,13 +14,15 @@ export class RegisterComponent {
   email: string = '';
   password: string = '';
   errorMessage: string = '';
+  name: string = '';
+  info: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
   async onSubmit() {
     try {
       this.errorMessage = '';
-      await this.authService.register(this.email, this.password);
+      await this.authService.register(this.email, this.password, this.name, this.info);
       this.router.navigate(['/whatchatz/chat']);
     } catch (error: any) {
       this.errorMessage = error.message || 'Registrierung fehlgeschlagen';

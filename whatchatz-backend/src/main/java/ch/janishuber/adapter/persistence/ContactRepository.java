@@ -5,6 +5,7 @@ import ch.janishuber.domain.Contact;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class ContactRepository {
                 .toList();
     }
 
+    @Transactional
     public void save(Contact contact) {
         ContactEntity entity = new ContactEntity(
                 contact.ownerId(),

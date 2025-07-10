@@ -1,0 +1,21 @@
+<div class="flex flex-col h-full w-full">
+    @if (selectedContact) {
+    <div class="flex flex-col h-full">
+        <div class="flex-shrink-0">
+            <app-chat-header [selectedContact]="selectedContact"></app-chat-header>
+        </div>
+
+        <div class="flex-1 min-h-0">
+            <app-messages-list [messages]="messages" [selectedContact]="selectedContact"></app-messages-list>
+        </div>
+
+        <div class="flex-shrink-0">
+            <app-message-input (sendMessage)="onSendMessage($event)"></app-message-input>
+        </div>
+    </div>
+    } @else {
+    <div class="flex items-center justify-center h-full text-gray-500 rounded-2xl">
+        <p>Wählen Sie einen Kontakt aus, um zu chatten</p>
+    </div>
+    }
+</div>

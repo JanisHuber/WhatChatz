@@ -2,13 +2,14 @@ package ch.janishuber.adapter.persistence;
 
 import ch.janishuber.adapter.persistence.entity.MessageEntity;
 import ch.janishuber.domain.Message;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 
-@RequestScoped
+@ApplicationScoped
 public class MessageRepository {
     @PersistenceContext(unitName = "whatchatzPU")
     private EntityManager em;
@@ -19,6 +20,7 @@ public class MessageRepository {
                 .getResultList();
     }
 
+    @Transactional
     public void save(Message message) {
         MessageEntity entity = new MessageEntity(
                 message.chatId(),

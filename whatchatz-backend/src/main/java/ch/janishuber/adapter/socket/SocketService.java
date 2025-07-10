@@ -15,7 +15,7 @@ public class SocketService {
     private MessageRepository messageRepository;
 
     public void saveMessage(Message message) {
-
+        messageRepository.save(message);
     }
 
     public String extractToken(String queryString) {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { AuthService } from './core/service/auth.service';
 
 
@@ -16,9 +16,8 @@ export class AppComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.authService.waitForAuthState();
-    console.log('Is Authenticated:', this.authService.isAuthenticated());
 
-    if (this.authService.isAuthenticated()) {
+    if (this.authService.isAuthenticated() && this.router.url !== '/whatchatz/user') {
       this.router.navigate(['/whatchatz/chat']);
     } else {
       this.router.navigate(['/whatchatz/user']);

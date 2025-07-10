@@ -1,0 +1,19 @@
+<div class="flex flex-col h-full bg-white rounded-2xl p-8">
+    <!-- Contact List -->
+    <div class="flex-1 overflow-y-auto w-full h-full scrollbar-track-transparent rounded-2xl">
+        <div *ngFor="let contact of contacts" (click)="onContactClick(contact)"
+            class="flex flex-row items-center p-4 hover:bg-gray-400 rounded-2xl hover:translate-x-0.5 transition-all duration-200 ease-in-out bg-gray-200 cursor-pointer m-4">
+            <app-contact-card [contact]="contact"></app-contact-card>
+        </div>
+    </div>
+
+    <div class="p-4 border-t border-gray-200 rounded-b-2xl">
+        <button (click)="onAddContactClick()"
+            class="w-full flex items-center justify-center p-3 text-blue-500 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200 border-2 border-dashed border-blue-300 hover:border-blue-400">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+            <span class="font-medium">Neuen Kontakt hinzufügen</span>
+        </button>
+    </div>
+</div>

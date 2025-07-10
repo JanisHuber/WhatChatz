@@ -30,7 +30,8 @@ public class WhatChatzSocket {
 
     @OnOpen
     public void onOpen(Session session) {
-        String chatId = extractChatIdFromUrl(session.getQueryString());
+        System.out.println("New WebSocket connection: " + session.getId());
+        String chatId = extractChatIdFromUrl(session.getRequestURI().toString());
 
         String token = socketService.extractToken(session.getQueryString());
         String uid = socketService.verifyAndExtractUid(token);
@@ -41,8 +42,9 @@ public class WhatChatzSocket {
     }
 
     @OnMessage
-    public void onMessage(String rawJson, Session sender) {
+    public void onMessage(Session sender, String rawJson) {
         try {
+            System.out.println("chatId: " + sender.getUserProperties().get("chatId"));
             String chatId = (String) sender.getUserProperties().get("chatId");
             MessageRequest messageRequest = parseMessage(rawJson);
             String senderUid = (String) sender.getUserProperties().get("uid");
@@ -90,7 +92,16 @@ public class WhatChatzSocket {
         if (sessions != null) {
             for (Session session : sessions) {
                 if (!session.equals(sender) && session.isOpen()) {
-                    session.getAsyncRemote().sendText("{\"type\":\"NEW_MESSAGE\",\"chatId\":\"" + chatId + "\"}");
+                    try {
+                        Map<String, String> payload = Map.of(
+                                "type", "NEW_MESSAGE",
+                                "chatId", chatId
+                        );
+                        String json = MAPPER.writeValueAsString(payload);
+                        session.getAsyncRemote().sendText(json);
+                    } catch (IOException e) {
+                        System.err.println("Error sending message to session " + session.getId() + ": " + e.getMessage());
+                    }
                 }
             }
         }
@@ -114,7 +125,9 @@ public class WhatChatzSocket {
     }
 
     private String extractChatIdFromUrl(String url) {
-        String[] segments = url.split("/");
-        return segments[segments.length - 1];
+        int idx = url.indexOf("?token=");
+        String cuttedUrl = (idx != -1) ? url.substring(0, idx) : url;
+        String[] parts = cuttedUrl.split("/");
+        return parts[parts.length - 1];
     }
 }

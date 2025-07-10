@@ -9,6 +9,7 @@ import {
   User,
 } from 'firebase/auth';
 import { Router } from '@angular/router';
+import { WhatchatzRestService } from './whatchatz-rest.service';
 
 
 @Injectable({ providedIn: 'root' })
@@ -19,7 +20,7 @@ export class AuthService {
   private userSubject = new BehaviorSubject<User | null>(null);
   public user$ = this.userSubject.asObservable();
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private whatchatzRestService: WhatchatzRestService) {
     onAuthStateChanged(this.auth, (user) => {
       this.currentUser = user;
       this.authStateInitialized = true;
@@ -51,6 +52,11 @@ export class AuthService {
     return await this.currentUser.getIdToken();
   }
 
+  async getUserId(): Promise<string | null> {
+    if (!this.currentUser) return null;
+    return this.currentUser.uid;
+  }
+
   async login(email: string, password: string): Promise<void> {
     try {
       await signInWithEmailAndPassword(this.auth, email, password);
@@ -59,9 +65,15 @@ export class AuthService {
     }
   }
 
-  async register(email: string, password: string): Promise<void> {
+  async register(email: string, password: string, name: string, info: string): Promise<void> {
     try {
       await createUserWithEmailAndPassword(this.auth, email, password);
+      const token = await this.currentUser?.getIdToken(true);
+      try {
+        await this.whatchatzRestService.saveUser(token || '', name, info);
+      } catch (error) {
+        throw error;
+      }
     } catch (error) {
       throw error;
     }
