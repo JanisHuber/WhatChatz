@@ -70,11 +70,14 @@ export class AuthService {
       await createUserWithEmailAndPassword(this.auth, email, password);
       const token = await this.currentUser?.getIdToken(true);
       try {
-        await this.whatchatzRestService.saveUser(token || '', name, info);
+        const response = await this.whatchatzRestService.saveUser(token || '', name, info).toPromise();
+        console.log('Backend response from saveUser:', response);
       } catch (error) {
+        console.error('Error saving user:', error);
         throw error;
       }
     } catch (error) {
+      console.error('Registration error:', error);
       throw error;
     }
   }

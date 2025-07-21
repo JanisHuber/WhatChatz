@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { AuthService } from '../../core/service/auth.service';
 import { LoginComponent } from '../../features/user/login/login.component';
 import { RegisterComponent } from '../../features/user/register/register.component';
@@ -7,7 +8,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { WhatchatzRestService } from '../../core/service/whatchatz-rest.service';
 import { User } from '../../core/models/models';
-
 
 @Component({
   selector: 'app-user',
@@ -19,8 +19,13 @@ export class UserComponent implements OnInit {
   isLoggedIn$!: Observable<boolean>;
   authStateInitialized = false;
   user: User | null = null;
+  activeTab: 'login' | 'register' = 'login';
 
-  constructor(private authService: AuthService, private whatchatzRestService: WhatchatzRestService) {
+  constructor(
+    private authService: AuthService,
+    private whatchatzRestService: WhatchatzRestService,
+    private router: Router
+  ) {
     this.isLoggedIn$ = this.authService.user$.pipe(
       map((user) => user !== null)
     );
@@ -46,5 +51,13 @@ export class UserComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  setActiveTab(tab: 'login' | 'register') {
+    this.activeTab = tab;
+  }
+
+  goToChat() {
+    this.router.navigate(['/whatchatz/chat']);
   }
 }

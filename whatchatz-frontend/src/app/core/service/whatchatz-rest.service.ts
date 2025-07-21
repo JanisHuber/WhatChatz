@@ -32,7 +32,7 @@ export class WhatchatzRestService {
   }
 
   saveUser(token: string, name: string, info: string) {
-    return this.http.post(this.apiUrl + '/api/users',
+    return this.http.post(this.apiUrl + '/api/users/new',
         {
           name: name,
           info: info,

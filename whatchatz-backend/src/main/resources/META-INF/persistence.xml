@@ -9,7 +9,7 @@
         <class>ch.janishuber.adapter.persistence.entity.ContactEntity</class>
         <class>ch.janishuber.adapter.persistence.entity.UserEntity</class>
         <properties>
-            <property name="jakarta.persistence.schema-generation.database.action" value="update"/>
+            <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
         </properties>
     </persistence-unit>
 </persistence>

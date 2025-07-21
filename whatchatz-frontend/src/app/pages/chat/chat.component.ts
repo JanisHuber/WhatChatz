@@ -76,6 +76,11 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   async addContact(name: string) {
     const token = await this.authService.getToken();
+    if (this.contacts.some(contact => contact.contactName === name)) {
+      this.showAddContactModal = false;
+      this.onContactSelected(this.contacts.find(contact => contact.contactName === name) as Contact);
+      return;
+    }
     if (token) {
       this.whatchatzRestService.searchUsers(token, name).subscribe((user) => {
         const userData = user as User;
@@ -83,6 +88,7 @@ export class ChatComponent implements OnInit, OnDestroy {
           .addContact(token, userData.uid, name)
           .subscribe((contact) => {
             this.loadContacts();
+            this.onContactSelected(contact as Contact);
             this.showAddContactModal = false;
           });
       });

@@ -1,11 +1,100 @@
-@if(!authStateInitialized) {
-<div>Lade Authentifizierungsstatus...</div>
-} @else if(isLoggedIn$ | async) {
-<h1>User</h1>
-<p>{{ user?.name }}</p>
-<p>{{ user?.info }}</p>
-<a (click)="logout()">logout</a>
-} @else {
-<app-login></app-login>
-<app-register></app-register>
-}
+<div class="flex h-screen bg-gray-300 p-4 justify-center">
+    <div class="flex max-w-4xl w-full justify-center">
+        @if(!authStateInitialized) {
+        <!-- Loading State -->
+        <div class="flex items-center justify-center w-full">
+            <div class="bg-white rounded-2xl p-8 shadow-lg">
+                <div class="flex items-center space-x-3">
+                    <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
+                    <span class="text-gray-600">Lade Authentifizierungsstatus...</span>
+                </div>
+            </div>
+        </div>
+        } @else if(isLoggedIn$ | async) {
+        <!-- User Profile -->
+        <div class="w-full max-w-2xl">
+            <div class="bg-white rounded-2xl h-full shadow-lg p-8">
+                <!-- Profile Header -->
+                <div class="text-center mb-8">
+                    <div class="w-32 h-32 bg-gray-300 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-2">{{ user?.name || 'Unbekannter Benutzer' }}</h1>
+                    <p class="text-gray-600">{{ user?.info || 'Keine Informationen verfügbar' }}</p>
+                </div>
+
+                <!-- Profile Info -->
+                <div class="space-y-6 mb-8">
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                        <div class="text-lg text-gray-900">{{ user?.name || 'Nicht verfügbar' }}</div>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Informationen</label>
+                        <div class="text-lg text-gray-900">{{ user?.info || 'Keine Informationen' }}</div>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">User ID</label>
+                        <div class="text-sm text-gray-500 font-mono">{{ user?.uid || 'Nicht verfügbar' }}</div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex space-x-4 justify-center">
+                    <button (click)="goToChat()"
+                        class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-8 rounded-lg transition-colors duration-200">
+                        Zum Chat
+                    </button>
+                    <button (click)="logout()"
+                        class="bg-red-500 hover:bg-red-600 text-white font-medium py-3 px-8 rounded-lg transition-colors duration-200">
+                        Abmelden
+                    </button>
+                </div>
+            </div>
+        </div>
+        } @else {
+        <!-- Login/Register Forms -->
+        <div class="w-full max-w-md">
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                <!-- Tab Headers -->
+                <div class="flex border-b border-gray-200">
+                    <button (click)="setActiveTab('login')"
+                        class="flex-1 py-4 px-6 text-center font-medium transition-colors duration-200" [ngClass]="{
+                                'text-blue-600 border-b-2 border-blue-600 bg-blue-50': activeTab === 'login',
+                                'text-gray-500 hover:text-gray-700 hover:bg-gray-50': activeTab !== 'login'
+                            }">
+                        Anmelden
+                    </button>
+                    <button (click)="setActiveTab('register')"
+                        class="flex-1 py-4 px-6 text-center font-medium transition-colors duration-200" [ngClass]="{
+                                'text-blue-600 border-b-2 border-blue-600 bg-blue-50': activeTab === 'register',
+                                'text-gray-500 hover:text-gray-700 hover:bg-gray-50': activeTab !== 'register'
+                            }">
+                        Registrieren
+                    </button>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="p-8">
+                    @if (activeTab === 'login') {
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Willkommen zurück</h2>
+                        <app-login></app-login>
+                    </div>
+                    } @else {
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Konto erstellen</h2>
+                        <app-register></app-register>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>

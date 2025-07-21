@@ -30,7 +30,6 @@ public class WhatChatzSocket {
 
     @OnOpen
     public void onOpen(Session session) {
-        System.out.println("New WebSocket connection: " + session.getId());
         String chatId = extractChatIdFromUrl(session.getRequestURI().toString());
 
         String token = socketService.extractToken(session.getQueryString());
@@ -44,7 +43,6 @@ public class WhatChatzSocket {
     @OnMessage
     public void onMessage(Session sender, String rawJson) {
         try {
-            System.out.println("chatId: " + sender.getUserProperties().get("chatId"));
             String chatId = (String) sender.getUserProperties().get("chatId");
             MessageRequest messageRequest = parseMessage(rawJson);
             String senderUid = (String) sender.getUserProperties().get("uid");

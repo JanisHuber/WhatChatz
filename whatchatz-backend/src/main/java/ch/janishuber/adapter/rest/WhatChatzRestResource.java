@@ -8,12 +8,14 @@ import ch.janishuber.adapter.persistence.MessageRepository;
 import ch.janishuber.adapter.persistence.UserRepository;
 import ch.janishuber.domain.Contact;
 import jakarta.inject.Inject;
+import jakarta.persistence.PersistenceException;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -29,27 +31,37 @@ public class WhatChatzRestResource {
     private MessageRepository messageRepository;
 
     @POST
-    @Path("/users")
+    @Path("/users/new")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response saveUser(@Context HttpHeaders headers, UserCreationRequest userCreationRequest) {
+        System.out.println(userCreationRequest);
+        String uid;
         try {
-            String uid = helpers.verifyAndExtractUid(headers);
-            try {
-                userRepository.save(uid, userCreationRequest.name(), userCreationRequest.info());
-            } catch (IllegalStateException e) {
-                System.out.println("returning bad request");
-                return Response.status(Response.Status.BAD_REQUEST).entity("User creation failed: " + e.getMessage()).build();
-            }
+            uid = helpers.verifyAndExtractUid(headers);
         } catch (IllegalArgumentException e) {
-            return Response.status(Response.Status.UNAUTHORIZED).entity("Unauthorized: " + e.getMessage()).build();
+            return Response.status(Response.Status.UNAUTHORIZED).entity(Map.of("error", "Unauthorized: " + e.getMessage())).build();
+        }
+        
+        try {
+            userRepository.save(uid, userCreationRequest.name(), userCreationRequest.info());
+        } catch (PersistenceException pe) {
+            Throwable root = pe.getCause();
+            if (root instanceof SQLIntegrityConstraintViolationException) {
+                return Response.status(Response.Status.CONFLICT).entity(Map.of(
+                        "error",
+                        "User creation failed: Name ‘" +
+                                userCreationRequest.name() +
+                                "’ already exists."
+                )).build();
+            }
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(Map.of(
+                    "error",
+                    "Internal server error: " + root.getMessage()
+            )).build();
         }
 
-        Map<String, String> result = Map.of("message", "User saved successfully");
-        return Response
-                .status(Response.Status.CREATED)
-                .entity(result)
-                .build();
+        return Response.status(Response.Status.CREATED).entity(Map.of("message", "User saved successfully")).build();
     }
 
     @GET
