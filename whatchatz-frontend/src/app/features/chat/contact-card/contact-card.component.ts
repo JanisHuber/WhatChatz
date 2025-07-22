@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Contact } from '../../../core/models/models';
+import { Contact, ContactWithMeta } from '../../../core/models/models';
 
 @Component({
   selector: 'app-contact-card',
@@ -8,7 +8,7 @@ import { Contact } from '../../../core/models/models';
   styleUrl: './contact-card.component.css',
 })
 export class ContactCardComponent {
-  @Input() contact!: Contact;
+  @Input() contact!: ContactWithMeta;
 
   formatLastMessage(lastMessage: Date): string {
     const date = new Date(lastMessage);

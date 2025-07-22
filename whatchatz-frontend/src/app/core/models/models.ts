@@ -20,3 +20,7 @@ export interface Message {
   message: string;
   timeStamp: Date;
 }
+
+export interface ContactWithMeta extends Contact {
+  newMessagesCount: number;
+}

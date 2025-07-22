@@ -6,7 +6,7 @@ POST whatchatz/api/users Benutzer-Login (Body: UserCreationRequest)
 
 
 WebSocket Schnittstellen:  
-ws://<host>/ws/chat/{chatId}
+ws://<host>/ws
 OnOpen: Verbindet einen Benutzer mit einem Chatraum (authentifiziert über Token im Query-String)
 OnMessage: Sende eine Nachricht als JSON (MessageRequest)
 OnClose: Trennt die Verbindung vom Chatraum

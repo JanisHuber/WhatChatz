@@ -1,4 +1,4 @@
 package ch.janishuber.adapter.dto;
 
-public record MessageRequest(String message, String receiverId) {
+public record MessageRequest(String message, String receiverId, String chatId) {
 }

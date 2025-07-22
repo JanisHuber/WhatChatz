@@ -7,7 +7,7 @@ import { AuthService } from '../../core/service/auth.service';
 import { WhatchatzRestService } from '../../core/service/whatchatz-rest.service';
 import { WhatchatzSocketService } from '../../core/service/whatchatz-socket.service';
 import { ContactListComponent } from '../../features/chat/contact-list/contact-list.component';
-import { Contact, Message, User } from '../../core/models/models';
+import { Contact, ContactWithMeta, Message, User } from '../../core/models/models';
 import { NewContactPopupComponent } from '../../features/chat/new-contact-popup/new-contact-popup.component';
 import { generateChatId } from '../../shared/helpers/uid.helpers';
 import { ChatWindowComponent } from '../../features/chat/chat-window/chat-window.component';
@@ -27,9 +27,9 @@ import { LeftBarComponent } from '../../features/chat/left-bar/left-bar.componen
   styleUrl: './chat.component.css',
 })
 export class ChatComponent implements OnInit, OnDestroy {
-  contacts: Contact[] = [];
+  contacts: ContactWithMeta[] = [];
   showAddContactModal = false;
-  selectedContact: Contact | null = null;
+  selectedContact: ContactWithMeta | null = null;
   messages: Message[] = [];
   private currentChatId: string | null = null;
   private messageNotificationSubscription?: Subscription;
@@ -44,12 +44,25 @@ export class ChatComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     await this.authService.waitForAuthState();
     await this.loadContacts();
+    const token = await this.authService.getToken();
+    if (!token) {
+      console.error('No token found, user might not be authenticated');
+      return;
+    }
+    this.whatchatzSocketService.connect(token);
 
     this.messageNotificationSubscription = this.whatchatzSocketService
       .getNewMessageNotifications()
       .subscribe((message: Message) => {
-        if (this.currentChatId === message.chatId) {
+        if (this.currentChatId === message.chatId && this.currentChatId !== null) {
           this.reloadCurrentMessages();
+        } else {
+          for (const contact of this.contacts) {
+            if (generateChatId(contact.contactId, contact.ownerId) === message.chatId) {
+              contact.newMessagesCount += 1;
+              break;
+            }
+          }
         }
       });
   }
@@ -69,7 +82,10 @@ export class ChatComponent implements OnInit, OnDestroy {
     const token = await this.authService.getToken();
     if (token) {
       this.whatchatzRestService.getContactsFor(token).subscribe((contacts) => {
-        this.contacts = contacts;
+        this.contacts = contacts.map(contact => ({
+          ...contact,
+          newMessagesCount: 0
+        })) as ContactWithMeta[];
       });
     }
   }
@@ -96,14 +112,18 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   async onContactSelected(contact: Contact) {
-    this.selectedContact = contact;
+    const selected = this.contacts.find(c => c.contactId === contact.contactId);
+    if (selected) {
+      this.selectedContact = selected;
+    } else {
+      this.selectedContact = { ...contact, newMessagesCount: 0 };
+    }
+    this.contacts.find(c => c.contactId === contact.contactId)!.newMessagesCount = 0;
     const token = await this.authService.getToken();
     const userId = await this.authService.getUserId();
     if (token && userId) {
       const chatId = generateChatId(contact.contactId, userId);
       this.currentChatId = chatId;
-
-      this.whatchatzSocketService.connect(chatId, token);
 
       this.whatchatzRestService
         .loadMessages(token, chatId)
@@ -130,6 +150,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     await this.whatchatzSocketService.send({
       message: message,
       receiverId: this.selectedContact?.contactId,
+      chatId: this.currentChatId,
     });
     await this.reloadCurrentMessages();
   }

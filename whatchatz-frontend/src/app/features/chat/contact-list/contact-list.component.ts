@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Contact } from '../../../core/models/models';
+import { Contact, ContactWithMeta } from '../../../core/models/models';
 import { ContactCardComponent } from '../contact-card/contact-card.component';
 
 @Component({
@@ -10,12 +10,16 @@ import { ContactCardComponent } from '../contact-card/contact-card.component';
   styleUrl: './contact-list.component.css',
 })
 export class ContactListComponent {
-  @Input() contacts: Contact[] = [];
+  @Input() contacts: ContactWithMeta[] = [];
   @Input() selectedContactId: number | null = null;
-  @Output() contactSelected = new EventEmitter<Contact>();
+  @Output() contactSelected = new EventEmitter<ContactWithMeta>();
   @Output() addContactRequested = new EventEmitter<void>();
 
-  onContactClick(contact: Contact) {
+  getContactList(): ContactWithMeta[] {
+    return [...this.contacts].sort((a, b) => b.newMessagesCount - a.newMessagesCount);
+  }
+
+  onContactClick(contact: ContactWithMeta) {
     this.contactSelected.emit(contact);
   }
 

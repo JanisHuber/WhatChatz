@@ -7,16 +7,14 @@ export class WhatchatzSocketService {
   private socket!: WebSocket;
   private newMessageSubject = new Subject<Message>();
 
-  public connect(chatId: string, token: string): void {
-    const wsUrl = `ws://localhost:9080/ws/chat/${chatId}?token=${token}`;
-    this.socket = new WebSocket(wsUrl);
+  public connect(token: string): void {
+    const wsUrl = `ws://localhost:9080/ws?token=${token}`;
 
-    this.socket.onopen = () => {
-    };
+    this.socket = new WebSocket(wsUrl);
+    this.socket.onopen = () => {};
 
     this.socket.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      console.log('Nachricht erhalten:', data);
 
       if (data.type === 'NEW_MESSAGE') {
         this.newMessageSubject.next(data);
@@ -36,6 +34,7 @@ export class WhatchatzSocketService {
       const payload = {
         message: msg.message,
         receiverId: msg.receiverId,
+        chatId: msg.chatId,
       };
       const json = JSON.stringify(payload);
       this.socket.send(json);

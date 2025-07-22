@@ -11,16 +11,20 @@ import jakarta.websocket.server.ServerEndpoint;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-@ServerEndpoint(value = "/ws/chat/{chatId}")
+@ServerEndpoint(value = "/ws")
 @ApplicationScoped
 public class WhatChatzSocket {
 
-    private static final Map<String, Set<Session>> chatRooms = new ConcurrentHashMap<>();
     private static final ObjectMapper MAPPER = new ObjectMapper();
+
+    private static final Map<String, Set<Session>> chatSubscriptions = new ConcurrentHashMap<>();
+    private static final Map<Session, Set<String>> sessionSubscriptions = new ConcurrentHashMap<>();
+
     private SocketService socketService;
 
     @PostConstruct
@@ -30,52 +34,63 @@ public class WhatChatzSocket {
 
     @OnOpen
     public void onOpen(Session session) {
-        String chatId = extractChatIdFromUrl(session.getRequestURI().toString());
-
+        System.out.println("New WebSocket connection established: " + session.getId());
         String token = socketService.extractToken(session.getQueryString());
         String uid = socketService.verifyAndExtractUid(token);
         session.getUserProperties().put("uid", uid);
-        session.getUserProperties().put("chatId", chatId);
 
-        chatRooms.computeIfAbsent(chatId, k -> ConcurrentHashMap.newKeySet()).add(session);
+        sessionSubscriptions.put(session, ConcurrentHashMap.newKeySet());
+        List<String> chatIds = socketService.getAllChatIdsFor(uid);
+        System.out.println("User with UID: " + uid + " has chat IDs: " + chatIds);
+        for (String chatId : chatIds) {
+            chatSubscriptions.computeIfAbsent(chatId, k -> ConcurrentHashMap.newKeySet()).add(session);
+            sessionSubscriptions.get(session).add(chatId);
+        }
     }
 
     @OnMessage
     public void onMessage(Session sender, String rawJson) {
         try {
-            String chatId = (String) sender.getUserProperties().get("chatId");
-            MessageRequest messageRequest = parseMessage(rawJson);
-            String senderUid = (String) sender.getUserProperties().get("uid");
-            if (senderUid == null) {
-                sendError(sender, "Missing authenticated UID", 401);
-                return;
-            }
-
-            Message message = new Message(
-                    0L,
-                    chatId,
-                    senderUid,
-                    messageRequest.receiverId(),
-                    messageRequest.message(),
-                    LocalDateTime.now()
-            );
-
-            socketService.saveMessage(message);
-
-            broadcastNotification(chatId, sender);
+            handleChatMessage(sender, rawJson);
         } catch (Exception e) {
             sendError(sender, e.getMessage(), 400);
         }
     }
 
+
+    private void handleChatMessage(Session sender, String rawJson) throws IOException {
+        MessageRequest req = parseMessage(rawJson);
+        String senderUid = (String) sender.getUserProperties().get("uid");
+
+        if (senderUid == null) {
+            sendError(sender, "Missing authenticated UID", 401);
+            return;
+        }
+        Message message = new Message(
+                0L,
+                req.chatId(),
+                senderUid,
+                req.receiverId(),
+                req.message(),
+                LocalDateTime.now()
+        );
+
+        socketService.saveMessage(message);
+        broadcastNotification(req.chatId(), sender);
+    }
+
     @OnClose
     public void onClose(Session session) {
-        String chatId = (String) session.getUserProperties().get("chatId");
-        Set<Session> sessions = chatRooms.get(chatId);
-        if (sessions != null) {
-            sessions.remove(session);
-            if (sessions.isEmpty()) {
-                chatRooms.remove(chatId);
+        Set<String> subscribedChats = sessionSubscriptions.remove(session);
+        if (subscribedChats != null) {
+            for (String chatId : subscribedChats) {
+                Set<Session> sessions = chatSubscriptions.get(chatId);
+                if (sessions != null) {
+                    sessions.remove(session);
+                    if (sessions.isEmpty()) {
+                        chatSubscriptions.remove(chatId);
+                    }
+                }
             }
         }
     }
@@ -86,24 +101,29 @@ public class WhatChatzSocket {
     }
 
     private void broadcastNotification(String chatId, Session sender) {
-        Set<Session> sessions = chatRooms.get(chatId);
-        if (sessions != null) {
-            for (Session session : sessions) {
-                if (!session.equals(sender) && session.isOpen()) {
-                    try {
-                        Map<String, String> payload = Map.of(
-                                "type", "NEW_MESSAGE",
-                                "chatId", chatId
-                        );
-                        String json = MAPPER.writeValueAsString(payload);
-                        session.getAsyncRemote().sendText(json);
-                    } catch (IOException e) {
-                        System.err.println("Error sending message to session " + session.getId() + ": " + e.getMessage());
-                    }
+        String senderUid = (String) sender.getUserProperties().get("uid");
+        System.out.println("Broadcasting new message for chatId: " + chatId + " from uid: " + senderUid);
+
+        Set<Session> sessions = chatSubscriptions.getOrDefault(chatId, Set.of());
+        System.out.println(sessions.size());
+        for (Session session : sessions) {
+            String sessionUid = (String) session.getUserProperties().get("uid");
+
+            if (!session.equals(sender) && session.isOpen()) {
+                try {
+                    System.out.println("→ Message sent to UID: " + sessionUid + ", sessionId: " + session.getId());
+                    Map<String, String> payload = Map.of(
+                            "type", "NEW_MESSAGE",
+                            "chatId", chatId
+                    );
+                    session.getAsyncRemote().sendText(MAPPER.writeValueAsString(payload));
+                } catch (IOException e) {
+                    System.err.println("Broadcast failed for session " + session.getId() + ": " + e.getMessage());
                 }
             }
         }
     }
+
 
     private void sendError(Session session, String reason, int code) {
         String errorJson = String.format(
@@ -114,18 +134,11 @@ public class WhatChatzSocket {
         try {
             session.getBasicRemote().sendText(errorJson);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Failed to send error: " + e.getMessage());
         }
     }
 
     private MessageRequest parseMessage(String json) throws IOException {
         return MAPPER.readValue(json, MessageRequest.class);
-    }
-
-    private String extractChatIdFromUrl(String url) {
-        int idx = url.indexOf("?token=");
-        String cuttedUrl = (idx != -1) ? url.substring(0, idx) : url;
-        String[] parts = cuttedUrl.split("/");
-        return parts[parts.length - 1];
     }
 }

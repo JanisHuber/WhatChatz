@@ -11,4 +11,9 @@
         <div class="font-medium text-gray-900 truncate">{{ contact.contactName }}</div>
         <div class="text-sm text-gray-500">{{ formatLastMessage(contact.lastMessage) }}</div>
     </div> 
+    @if (contact.newMessagesCount && contact.newMessagesCount > 0) {
+        <div class="ml-2 text-red-500 font-bold">
+            <span class="text-xs"><div class="w-6 h-6 bg-red-600 text-white rounded-full flex items-center justify-center text-sm font-bold">{{contact.newMessagesCount}}</div></span>
+        </div>
+    }
 </div>
