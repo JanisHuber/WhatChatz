@@ -42,7 +42,7 @@ public class WhatChatzRestResource {
         } catch (IllegalArgumentException e) {
             return Response.status(Response.Status.UNAUTHORIZED).entity(Map.of("error", "Unauthorized: " + e.getMessage())).build();
         }
-        
+
         try {
             userRepository.save(uid, userCreationRequest.name(), userCreationRequest.info());
         } catch (PersistenceException pe) {
@@ -124,7 +124,7 @@ public class WhatChatzRestResource {
     @Path("/chats/{chatId}/messages")
     public Response getAllMessagesForChat(@PathParam("chatId") String chatId, @Context HttpHeaders headers) {
         try {
-            String uid = helpers.verifyAndExtractUid(headers);
+            helpers.verifyAndExtractUid(headers);
             return Response.ok(messageRepository.getAllMessagesForChat(chatId)).build();
         } catch (IllegalArgumentException e) {
             return Response.status(Response.Status.UNAUTHORIZED).entity("Unauthorized: " + e.getMessage()).build();

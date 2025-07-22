@@ -34,14 +34,12 @@ public class WhatChatzSocket {
 
     @OnOpen
     public void onOpen(Session session) {
-        System.out.println("New WebSocket connection established: " + session.getId());
         String token = socketService.extractToken(session.getQueryString());
         String uid = socketService.verifyAndExtractUid(token);
         session.getUserProperties().put("uid", uid);
 
         sessionSubscriptions.put(session, ConcurrentHashMap.newKeySet());
         List<String> chatIds = socketService.getAllChatIdsFor(uid);
-        System.out.println("User with UID: " + uid + " has chat IDs: " + chatIds);
         for (String chatId : chatIds) {
             chatSubscriptions.computeIfAbsent(chatId, k -> ConcurrentHashMap.newKeySet()).add(session);
             sessionSubscriptions.get(session).add(chatId);
@@ -101,17 +99,12 @@ public class WhatChatzSocket {
     }
 
     private void broadcastNotification(String chatId, Session sender) {
-        String senderUid = (String) sender.getUserProperties().get("uid");
-        System.out.println("Broadcasting new message for chatId: " + chatId + " from uid: " + senderUid);
-
         Set<Session> sessions = chatSubscriptions.getOrDefault(chatId, Set.of());
         System.out.println(sessions.size());
         for (Session session : sessions) {
-            String sessionUid = (String) session.getUserProperties().get("uid");
 
             if (!session.equals(sender) && session.isOpen()) {
                 try {
-                    System.out.println("→ Message sent to UID: " + sessionUid + ", sessionId: " + session.getId());
                     Map<String, String> payload = Map.of(
                             "type", "NEW_MESSAGE",
                             "chatId", chatId
