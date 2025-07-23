@@ -32,7 +32,6 @@ public class FirebaseInitializer {
             }
 
             System.out.println("Firebase erfolgreich initialisiert mit: " + credentialsPath);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
