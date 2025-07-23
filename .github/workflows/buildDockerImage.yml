@@ -69,6 +69,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Check WAR file exists
+        run: ls -lh whatchatz-backend/target
+        
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
