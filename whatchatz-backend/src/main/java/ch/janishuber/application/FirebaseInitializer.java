@@ -7,6 +7,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.ejb.Singleton;
 import jakarta.ejb.Startup;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 
 @Singleton
@@ -16,12 +17,12 @@ public class FirebaseInitializer {
     @PostConstruct
     public void init() {
         try {
-            InputStream serviceAccount = getClass()
-                    .getClassLoader()
-                    .getResourceAsStream("whatchatz-firebase-adminsdk-fbsvc-8b5abfc2b9.json");
-            if (serviceAccount == null) {
-                throw new IllegalStateException("Firebase-Credentials nicht gefunden");
+            String credentialsPath = System.getenv("GOOGLE_APPLICATION_CREDENTIALS");
+            if (credentialsPath == null || credentialsPath.isEmpty()) {
+                throw new IllegalStateException("GOOGLE_APPLICATION_CREDENTIALS ist nicht gesetzt");
             }
+            InputStream serviceAccount = new FileInputStream(credentialsPath);
+
             FirebaseOptions options = FirebaseOptions.builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                     .build();
@@ -29,6 +30,8 @@ public class FirebaseInitializer {
             if (FirebaseApp.getApps().isEmpty()) {
                 FirebaseApp.initializeApp(options);
             }
+
+            System.out.println("Firebase erfolgreich initialisiert mit: " + credentialsPath);
 
         } catch (Exception e) {
             e.printStackTrace();
