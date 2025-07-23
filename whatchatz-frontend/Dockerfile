@@ -15,7 +15,8 @@ FROM nginx:alpine
 
 RUN rm -rf /usr/share/nginx/html/*
 
-COPY --from=builder /app/dist/whatchatz /usr/share/nginx/html
+COPY --from=builder /app/dist/whatchatz-frontend/browser /usr/share/nginx/html
+
 
 COPY default.conf /etc/nginx/conf.d/default.conf
 
