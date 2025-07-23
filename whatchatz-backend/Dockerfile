@@ -7,7 +7,6 @@ COPY --chown=1001:0 libs/mariadb-java-client-3.5.2.jar /config/resources/
 
 RUN features.sh
 
-COPY --chown=1001:0 backend.war /config/apps
-
+COPY --chown=1001:0 target/*.war /config/apps
 
 RUN configure.sh
