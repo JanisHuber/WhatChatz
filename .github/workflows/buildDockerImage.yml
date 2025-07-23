@@ -41,6 +41,17 @@ jobs:
             wsUrl: "${{ secrets.WS_URL }}"
           };
           EOF
+      - name: Create default environment.ts
+        run: |
+          mkdir -p whatchatz-frontend/src/environments
+          cat <<EOF > whatchatz-frontend/src/environments/environment.ts
+          export const environment = {
+            production: false,
+            firebaseConfig: {},
+            apiUrl: '',
+            wsUrl: ''
+          };
+          EOF
 
       - name: Set up JDK 21
         uses: actions/setup-java@v4
