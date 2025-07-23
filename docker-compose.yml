@@ -8,18 +8,21 @@ services:
       MARIADB_PASSWORD: ${MARIADB_PASSWORD}
     volumes:
       - db_data:/var/lib/mysql
-      - ./whatchatz-database:/docker-entrypoint-initdb.d
+      - ./setup.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "3306:3306"
 
   backend:
-    image: whatchatz-backend:latest
+    image: ghcr.io/janishuber/whatchatz-backend:latest
     environment:
       DB_HOST: ${DB_HOST}
       DB_PORT: ${DB_PORT}
       DB_NAME: ${MARIADB_DATABASE}
       DB_USER: ${MARIADB_USER}
       DB_PASSWORD: ${MARIADB_PASSWORD}
+      GOOGLE_APPLICATION_CREDENTIALS: /app/firebase.json
+    volumes:
+      - ./secrets/firebase.json:/app/firebase.json
     ports:
       - "${BACKEND_PORT}:9080"
     depends_on:
