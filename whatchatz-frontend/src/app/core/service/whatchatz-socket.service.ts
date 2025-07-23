@@ -1,17 +1,20 @@
-import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
-import { Message } from '../models/models';
+import {Injectable} from '@angular/core';
+import {Observable, Subject} from 'rxjs';
+import {Message} from '../models/models';
+import {environment} from '../../../environments/environment';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class WhatchatzSocketService {
   private socket!: WebSocket;
   private newMessageSubject = new Subject<Message>();
+  private wsUrl = environment.wsUrl
 
   public connect(token: string): void {
-    const wsUrl = `ws://localhost:9080/ws?token=${token}`;
+    const wsUrl = this.wsUrl + `?token=${token}`;
 
     this.socket = new WebSocket(wsUrl);
-    this.socket.onopen = () => {};
+    this.socket.onopen = () => {
+    };
 
     this.socket.onmessage = (event) => {
       const data = JSON.parse(event.data);
