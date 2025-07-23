@@ -22,9 +22,9 @@ services:
       DB_NAME: ${MARIADB_DATABASE}
       DB_USER: ${MARIADB_USER}
       DB_PASSWORD: ${MARIADB_PASSWORD}
-      GOOGLE_APPLICATION_CREDENTIALS: /app/firebase.json
+      GOOGLE_APPLICATION_CREDENTIALS: /config/firebase.json
     volumes:
-      - ./secrets/firebase.json:/app/firebase.json
+      - ./secrets/firebase.json:/config/firebase.json
     ports:
       - "${BACKEND_PORT}:9080"
     depends_on:
