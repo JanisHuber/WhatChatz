@@ -33,7 +33,6 @@
     <ssl id="defaultSSLConfig"
          trustStoreRef="googleTrust"/>
 
-
     <trustStore id="googleTrust"
                 location="${server.config.dir}/resources/security/key.p12"
                 type="PKCS12"

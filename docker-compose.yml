@@ -24,7 +24,6 @@ services:
       DB_PASSWORD: ${MARIADB_PASSWORD}
       GOOGLE_APPLICATION_CREDENTIALS: /config/firebase.json
     volumes:
-      - ./server.xml:/opt/ol/wlp/usr/servers/defaultServer/server.xml:ro
       - ./key.p12:/opt/ol/wlp/usr/servers/defaultServer/resources/security/key.p12:ro
       - ./secrets/firebase.json:/config/firebase.json:ro
     ports:
