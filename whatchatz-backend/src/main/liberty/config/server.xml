@@ -30,14 +30,6 @@
     <!-- Configures the application on a specified context root -->
     <webApplication contextRoot="/" location="whatchatz.war"/>
 
-    <ssl id="defaultSSLConfig"
-         trustStoreRef="googleTrust"/>
-
-    <trustStore id="googleTrust"
-                location="${server.config.dir}/resources/security/key.p12"
-                type="PKCS12"
-                password="changeit"/>
-
     <dataSource id="whatchatz" jndiName="jdbc/whatchatz" includeEnvVars="true">
         <jdbcDriver libraryRef="mariadb" javax.sql.DataSource="org.mariadb.jdbc.MariaDbDataSource"
                     javax.sql.XADataSource="org.mariadb.jdbc.MariaDbDataSource"
