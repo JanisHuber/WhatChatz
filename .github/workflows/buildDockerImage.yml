@@ -106,3 +106,7 @@ jobs:
           subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend
           subject-digest: ${{ steps.frontend.outputs.digest }}
           push-to-registry: true
+
+      - name: Call Hetzner Webhook
+        run: |
+          curl -X POST ${{ secrets.DEPLOY_WEBHOOK_URL }}
