@@ -1,4 +1,4 @@
-FROM icr.io/appcafe/open-liberty:full-java21-openj9-ubi
+FROM icr.io/appcafe/open-liberty:full-java21-openj9
 
 # Install truststore and certificates
 RUN dnf install -y ca-certificates && update-ca-trust
