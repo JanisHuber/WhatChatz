@@ -35,7 +35,6 @@ public class WhatChatzRestResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response saveUser(@Context HttpHeaders headers, UserCreationRequest userCreationRequest) {
-        System.out.println(userCreationRequest);
         String uid;
         try {
             uid = helpers.verifyAndExtractUid(headers);
