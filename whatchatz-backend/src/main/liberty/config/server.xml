@@ -31,7 +31,13 @@
     <webApplication contextRoot="/" location="whatchatz.war"/>
 
     <ssl id="defaultSSLConfig"
+         keyStoreRef="defaultKeyStore"
          trustStoreRef="googleTrust"/>
+
+    <keyStore id="defaultKeyStore"
+              location="${server.config.dir}/resources/security/key.p12"
+              type="PKCS12"
+              password="changeit"/>
 
     <trustStore id="googleTrust"
                 location="${server.config.dir}/resources/security/key.p12"
