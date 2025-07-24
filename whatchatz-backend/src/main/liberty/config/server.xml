@@ -30,6 +30,8 @@
     <!-- Configures the application on a specified context root -->
     <webApplication contextRoot="/" location="whatchatz.war"/>
 
+    <ssl id="defaultSSLConfig"/>
+
     <dataSource id="whatchatz" jndiName="jdbc/whatchatz" includeEnvVars="true">
         <jdbcDriver libraryRef="mariadb" javax.sql.DataSource="org.mariadb.jdbc.MariaDbDataSource"
                     javax.sql.XADataSource="org.mariadb.jdbc.MariaDbDataSource"
