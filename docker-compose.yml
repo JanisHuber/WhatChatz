@@ -25,6 +25,7 @@ services:
       GOOGLE_APPLICATION_CREDENTIALS: /config/firebase.json
     volumes:
       - ./secrets/firebase.json:/config/firebase.json
+      - ./key.p12:/config/resources/security/key.p12:ro
     ports:
       - "${BACKEND_PORT}:9080"
     depends_on:
