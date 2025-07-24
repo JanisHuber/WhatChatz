@@ -24,6 +24,14 @@
               maxAge="3600"/>
     </httpDispatcher>
 
+    <keyStore id="googleTrust"
+              location="${server.config.dir}/resources/security/key.p12"
+              type="PKCS12"
+              password="changeit"/>
+    <ssl id="defaultSSLConfig"
+         trustStoreRef="googleTrust"/>
+
+
     <!-- Automatically expand WAR files and EAR files -->
     <applicationManager autoExpand="true"/>
 
