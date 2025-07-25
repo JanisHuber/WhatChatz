@@ -109,4 +109,4 @@ jobs:
 
       - name: Call Hetzner Webhook
         run: |
-          curl -X POST ${{ secrets.DEPLOY_WEBHOOK_URL }}
+          curl -X POST ${{ secrets.DEPLOY_WEBHOOK_URL }} || true
