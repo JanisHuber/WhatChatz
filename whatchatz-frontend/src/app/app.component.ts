@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
-import { AuthService } from './core/service/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {Router, RouterOutlet} from '@angular/router';
+import {AuthService} from './core/service/auth.service';
 
 
 @Component({
@@ -12,9 +12,11 @@ import { AuthService } from './core/service/auth.service';
 export class AppComponent implements OnInit {
   title = 'whatchatz';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {
+  }
 
   async ngOnInit(): Promise<void> {
+    console.log("test");
     await this.authService.waitForAuthState();
 
     if (this.authService.isAuthenticated() && this.router.url !== '/whatchatz/user') {
