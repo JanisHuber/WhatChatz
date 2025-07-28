@@ -124,6 +124,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     if (token && userId) {
       const chatId = generateChatId(contact.contactId, userId);
       this.currentChatId = chatId;
+      console.log('Current chat ID:', this.currentChatId);
 
       this.whatchatzRestService
         .loadMessages(token, chatId)
@@ -147,6 +148,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   async onSendMessage(message: string) {
+    console.log('sending with chat ID.', this.currentChatId)
     await this.whatchatzSocketService.send({
       message: message,
       receiverId: this.selectedContact?.contactId,
