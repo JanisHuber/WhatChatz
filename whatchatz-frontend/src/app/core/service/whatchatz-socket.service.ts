@@ -14,6 +14,7 @@ export class WhatchatzSocketService {
 
     this.socket = new WebSocket(wsUrl);
     this.socket.onopen = () => {
+      console.log('WebSocket-Verbindung hergestellt:', wsUrl);
     };
 
     this.socket.onmessage = (event) => {
@@ -34,6 +35,7 @@ export class WhatchatzSocketService {
       } else {
         console.error('WebSocket-Verbindung unerwartet geschlossen', ev);
       }
+      this.connect(token);
     };
   }
 
