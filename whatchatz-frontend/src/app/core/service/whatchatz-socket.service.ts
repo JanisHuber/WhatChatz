@@ -29,6 +29,11 @@ export class WhatchatzSocketService {
     };
 
     this.socket.onclose = (ev) => {
+      if (ev.wasClean) {
+        console.log('WebSocket-Verbindung geschlossen');
+      } else {
+        console.error('WebSocket-Verbindung unerwartet geschlossen', ev);
+      }
     };
   }
 
