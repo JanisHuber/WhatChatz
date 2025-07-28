@@ -30,8 +30,6 @@ public class FirebaseInitializer {
             if (FirebaseApp.getApps().isEmpty()) {
                 FirebaseApp.initializeApp(options);
             }
-
-            System.out.println("Firebase erfolgreich initialisiert mit: " + credentialsPath);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -100,7 +100,6 @@ public class WhatChatzSocket {
 
     private void broadcastNotification(String chatId, Session sender) {
         Set<Session> sessions = chatSubscriptions.getOrDefault(chatId, Set.of());
-        System.out.println(sessions.size());
         for (Session session : sessions) {
 
             if (!session.equals(sender) && session.isOpen()) {

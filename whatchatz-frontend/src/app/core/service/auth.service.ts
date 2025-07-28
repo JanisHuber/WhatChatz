@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -8,11 +8,11 @@ import {
   signOut,
   User,
 } from 'firebase/auth';
-import { Router } from '@angular/router';
-import { WhatchatzRestService } from './whatchatz-rest.service';
+import {Router} from '@angular/router';
+import {WhatchatzRestService} from './whatchatz-rest.service';
 
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class AuthService {
   private currentUser: User | null = null;
   private auth = getAuth();
@@ -71,7 +71,7 @@ export class AuthService {
       const token = await this.currentUser?.getIdToken(true);
       try {
         const response = await this.whatchatzRestService.saveUser(token || '', name, info).toPromise();
-        console.log('Backend response from saveUser:', response);
+        console.log(response);
       } catch (error) {
         console.error('Error saving user:', error);
         throw error;

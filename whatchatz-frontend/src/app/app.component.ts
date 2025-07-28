@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    console.log("test");
     await this.authService.waitForAuthState();
 
     if (this.authService.isAuthenticated() && this.router.url !== '/whatchatz/user') {
